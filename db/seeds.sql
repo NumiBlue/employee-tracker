@@ -13,7 +13,7 @@ VALUES
 ("Day Shift Leader", 26500, 3),
 ("Night Shift Leader", 27000, 3),
 ("Host", 13000, 4),
-("Intern". 9000, 4),
+("Intern", 9000, 4),
 
 
 
