@@ -89,12 +89,27 @@ function viewDepartments() {
     console.log(`
   Departments
     `);
-  
+  db.query(`SELECT * FROM department`, function (err, result, fields) {
+        if (err) throw err;
+        console.table(result);
+    
+        nav();
+      });
+    }
 //roles
 function viewRoles() {
     console.log(`
   Roles
     `);
+    db.query(
+        
+        function (err, result, fields) {
+          if (err) throw err;
+          console.table(result);
+    
+          nav();
+        }
+      );
 //employees
 //db.query
 //employees by department
