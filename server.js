@@ -560,6 +560,7 @@ nav();
         );
       });
   }
+},
 //delete employee
 function theyGone() {
     const doWhat = [];
@@ -598,12 +599,12 @@ nav();
         );
       });
   }
-}
+},
 //exit
 function done() {
     console.log(`
     Work Complete
     `);
-}
+},
 
 doWhat();

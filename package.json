@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/NumiBlue/employee-tracker#readme",
   "dependencies": {
-    "dotenv": "^16.0.1"
+    "console.table": "^0.10.0",
+    "dotenv": "^16.0.1",
+    "mysql2": "^2.3.3"
   }
 }
