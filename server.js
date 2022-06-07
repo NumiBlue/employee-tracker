@@ -16,3 +16,39 @@
 //new role
 //return to menu
 //add employee
+//ask for title and id
+//db query to get name and id
+//get manager id or null
+//query new employee
+//return to menu
+//update employee role
+//db query to get role and id
+//prompts for changes
+//return to menu
+//update manager
+//db query to get employees name and id
+//prompts for info/select new manager
+//manager id or null
+//query to update role
+//return to menu
+//delete a department
+//db query to get department name and id
+//inquierer prompts
+//turn answer into array
+//remove department from db
+//return to menu
+//delete a role
+//role choice
+//db query for role and id
+//prompts
+//array
+//get id
+//query to remove role
+//return to menu
+//delete employee
+//db query for name and id
+//prompts
+//array 
+//remove an employee from db
+//return to menu
+//exit
