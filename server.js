@@ -365,24 +365,159 @@ db.query(
 nav();
         }
       );
-    }
+    });
 }
 //update employee role
+function updateEmployeeRole() {
+    const roleOptions = [];
+    const employeeOptions = [];
 //db query to get role and id
+db.query(`SELECT * FROM roles`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var role = dbData.id + ": " + dbData.title;
+      roleOptions.push(role);
+    });
+  });
+  db.query(`SELECT * FROM employee`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var employees = dbData.id + ": " + dbData.first_name + dbData.last_name;
+      employeeOptions.push(employees);
+    });
+    selectNewRole();
+  });
 //prompts for changes
+function selectNewRole() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "employeeChoice",
+          message: "Choose employee to update.",
+          choices: employeeOptions,
+        }, {
+            type: "list",
+            name: "roleChoice",
+            message: "Select the new role",
+            choices: roleOptions,
+          },
+        ])
+        .then((answers) => {
+            roleArray = answers.roleChoice.split("");
+        employeeArray = answers.employeeChoice.split("");
+        roleArray = answers.roleChoice.split("");
+        employeeArray = answers.employeeChoice.split("");
+
+        db.query(
+            `UPDATE employee 
+            SET role_id = ${roleId} 
+            WHERE employee.id = ${employeeId}`,
+            function (err, result, fields) {
+              if (err) throw err;
+              console.log("Employee Role Updated.");
 //return to menu
+        nav();
+      }
+   );
+  });
+ }
+}
 //update manager
+function updateManager() {
+    const optionsManager = [];
+    const optionsEmployee = [];
 //db query to get employees name and id
+db.query(`SELECT * FROM employee`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var employees = dbData.id + ": " + dbData.first_name + dbData.last_name;
+      optionsEmployee.push(employees);
+      optionsManager.push(employees);
+    });
+    optionsManager.push("null");
+    selectNewManager();
+  });
 //prompts for info/select new manager
+function selectNewManager() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "employeeChoice",
+          message: "Choose employee to update.",
+          choices: optionsEmployee,
+        },
+        {
+          type: "list",
+          name: "managerChoice",
+          message: "Select their new manager.",
+          choices: optionsManager,
+        },
+      ])
+      .then((answers) => {employeeArray = answers.employeeChoice.split("");
+      let employeeId = employeeArray[0];
 //manager id or null
+let managerId = [];
+        if (answers.managerChoice === "null") {
+          managerId.push("null");
+        } else {
+          let managerArray = answers.managerChoice.split("");
+          managerId.push(managerArray[0]);
+        }
 //query to update role
+db.query(
+    `UPDATE employee 
+    SET manager_id = ${managerId} 
+    WHERE employee.id = ${employeeId}`,
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log("Employee Manager Updated.");
 //return to menu
+nav();
+          }
+        );
+      });
+  }
+}
 //delete a department
+function removeDepartment() {
 //db query to get department name and id
+const whichDepartments = [];
+db.query(`SELECT * FROM department`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var departments = dbData.id + ": " + dbData.department_name;
+      whichDepartments.push(departments);
+    });
 //inquierer prompts
+function chooseDepartment() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "departmentChoice",
+          message: "Choose a department to delete.",
+          choices: whichDepartments,
+        },
+      ])
+      .then((answer) => {
 //turn answer into array
+deptArray = answer.departmentChoice.split("");
+let departmentId = deptArray[0];
 //remove department from db
+db.query(
+    `DELETE FROM department
+    WHERE department.id = ${departmentId}`,
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log("Department Removed.");
 //return to menu
+nav();
+          }
+        );
+      });
+  }
 //delete a role
 //role choice
 //db query for role and id
