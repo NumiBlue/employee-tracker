@@ -181,7 +181,37 @@ function viewBudget() {
     );
   }
 //add a department
+function addDepartment() {
+    console.log("Add Department");
+    inquirer
+      .prompt({
+        type: "input",
+        name: "departmentInput",
+        message: "Enter new department name.",
+        validate: (departmentInput) => {
+          if (!departmentInput) {
+            console.log("You must enter the department name.");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      })
+      .then((answer) => {
+        newDept = answer.departmentInput;
+  
+        db.query(
+          `INSERT INTO department (department_name)
+          VALUES ("${newDept}")`,
+          function (err, result, fields) {
+            if (err) throw err;
+            console.log("Department Added!");
 //return to nav/inquirer
+nav();
+        }
+      );
+    });
+}
 //add a role
 //search for department
 //new role
