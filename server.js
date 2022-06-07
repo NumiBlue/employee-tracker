@@ -518,18 +518,91 @@ nav();
         );
       });
   }
+},
 //delete a role
+function removeRole() {
 //role choice
+const optionsForRole = [];
 //db query for role and id
+db.query(`SELECT * FROM roles`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var role = dbData.id + ": " + dbData.title;
+      optionsForRole.push(role);
+    });
+    selectRole();
+  });
 //prompts
+function roleSelection() {
+    inquirer
+      .prompt({
+        type: "list",
+        name: "roleChoice",
+        message: "Choose a role to delete.",
+        choices: optionsForRole,
+      })
+      .then((answer) => {
 //array
+roleArray = answer.roleChoice.split("");
 //get id
+let roleId = roleArray[0];
 //query to remove role
+db.query(
+    `DELETE FROM roles
+    WHERE roles.id = ${roleId}`,
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log("Role Removed");
 //return to menu
+nav();
+          }
+        );
+      });
+  }
 //delete employee
+function theyGone() {
+    const doWhat = [];
 //db query for name and id
+db.query(`SELECT * FROM employee`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var employees = dbData.id + ": " + dbData.first_name + dbData.last_name;
+      doWhat.push(employees);
+    });
+    selectEmployee();
+  });
 //prompts
+function selectEmployee() {
+    inquirer
+      .prompt({
+        type: "list",
+        name: "employeeChoice",
+        message: "Choose an employee to remove.",
+        choices: doWhat,
+      })
+      .then((answer) => {
 //array 
+employeeArray = answer.employeeChoice.split("");
+let employeeId = employeeArray[0];
 //remove an employee from db
+db.query(
+    `DELETE FROM employee 
+    WHERE employee.id = ${employeeId};`,
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log("Employee Removed.")
 //return to menu
+nav();
+          }
+        );
+      });
+  }
+}
 //exit
+function done() {
+    console.log(`
+    Work Complete
+    `);
+}
+
+doWhat();
