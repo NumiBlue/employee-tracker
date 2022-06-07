@@ -213,9 +213,72 @@ nav();
     });
 }
 //add a role
+function addRole() {
 //search for department
+const whichDepartments = [];
+db.query(`SELECT * FROM department`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var departments = dbData.id + ": " + dbData.department_name;
+      whichDepartments.push(departments);
+    });
+  });
 //new role
-//return to menu
+inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "titleInput",
+        message: "Enter the new role name.",
+        validate: (titleInput) => {
+          if (!titleInput) {
+            console.log("You must enter the role name.");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "salaryInput",
+        message:
+          "Please enter a salary for the new role.",
+        validate: (salaryInput) => {
+          if (!salaryInput) {
+            console.log("You must put a salary for the role.");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      },
+      {
+        type: "list",
+        name: "departmentInput",
+        message: "Choose which department this role belongs to.",
+        choices: whichDepartments,
+      },
+    ])
+    .then((answers) => {
+      let title = answers.titleInput;
+      let salary = answers.salaryInput;
+      let deptArray = answers.departmentInput.split("");
+      let departmentId = deptArray[0];
+
+      db.query(
+        `INSERT INTO roles (title, salary, department_id)
+        VALUES ("${title}", ${salary}, ${departmentId})`,
+        function (err, result, fields) {
+          if (err) throw err;
+          console.log(" Role Added! ");
+
+          // return to menu
+          nav();
+        }
+      );
+    });
+}
 //add employee
 //ask for title and id
 //db query to get name and id
