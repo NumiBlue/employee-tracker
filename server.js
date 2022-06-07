@@ -1,6 +1,17 @@
 //const values
+const mysql = require("mysql2");
+const inquirer = require("inquirer");
+const consoleTable = require("console.table");
+require("dotenv").config();
+
 //connect to database
+const db = mysql.createConnection(
+    {
+        host: "localhost",
+
 //your mysql info
+user: process.env.DB_US,
+password: process.env.DB_PW,
 //inquirer 
 //departments
 //roles
