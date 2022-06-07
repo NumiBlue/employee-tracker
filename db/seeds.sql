@@ -23,7 +23,7 @@ VALUES
 ("Lashawn", "Cider", 1, 3),
 ("Ophelia", "Autumn", 4, 3),
 ("Hayden", "Cardamom", 3, 2),
-("Aiden", "Pepper", 4, 3;)
+("Aiden", "Pepper", 4, 3);
 
 
 ),
