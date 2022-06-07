@@ -3,3 +3,6 @@
 //your mysql info
 //inquirer 
 //departments
+//roles
+//employees
+//db.query
