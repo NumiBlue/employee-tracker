@@ -101,20 +101,85 @@ function viewRoles() {
     console.log(`
   Roles
     `);
+    //employees
+    //db.query
     db.query(
-        
+        `SELECT employee.id, employee.first_name AS First, employee.last_name AS Last, roles.title AS Role, department.department_name AS Department, roles.salary AS Salary, CONCAT(manager.last_name, ", ", manager.first_name) AS Manager
+        FROM employee
+            LEFT JOIN roles 
+                ON employee.role_id = roles.id
+            LEFT JOIN department 
+                ON roles.department_id = department.id
+            LEFT JOIN employee AS manager ON manager.id = employee.manager_id`,
         function (err, result, fields) {
           if (err) throw err;
           console.table(result);
-    
           nav();
         }
       );
-//employees
-//db.query
+
+
 //employees by department
+function viewEmployeesByDepartment() {
+    console.log(`
+  Employees by Department Table
+    `);
+  
+    db.query(
+      `SELECT employee.id, employee.first_name AS First, employee.last_name AS Last, department.department_name AS Department
+      FROM employee
+      LEFT JOIN roles 
+              ON employee.role_id = roles.id
+      LEFT JOIN department 
+              ON roles.department_id = department.id
+      ORDER BY Department DESC;`,
+      function (err, result, fields) {
+        if (err) throw err;
+        console.table(result);
+  
+        nav();
+      }
+    );
+  }
 //employees by manager
+function viewEmployeesByManager() {
+    console.log(`
+  Employees by Manager Table
+    `);
+  
+    db.query(
+      `SELECT employee.id, employee.first_name AS First, employee.last_name AS Last, CONCAT(manager.last_name, ", ", manager.first_name) AS Manager
+      FROM employee
+      LEFT JOIN employee AS manager ON manager.id = employee.manager_id
+      ORDER BY Manager DESC`,
+      function (err, result, fields) {
+        if (err) throw err;
+        console.table(result);
+  
+        nav();
+      }
+    );
+  }
 //employees by salary
+function viewBudget() {
+    console.log(`
+  Department Budget Table
+    `);
+  
+    db.query(
+      `SELECT department.department_name AS Department, SUM(roles.salary) AS Budget
+      FROM employee
+      INNER JOIN roles ON employee.role_id = roles.id
+      INNER JOIN department ON roles.department_id = department.id
+      GROUP BY department.department_name;`,
+      function (err, result, fields) {
+        if (err) throw err;
+        console.table(result);
+  
+        nav();
+      }
+    );
+  }
 //add a department
 //return to nav/inquirer
 //add a role
