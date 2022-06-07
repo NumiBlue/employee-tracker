@@ -32,13 +32,69 @@ type: "list",
 name: "navigation",
 message: "Please make a selection.",
 choices: [
-    "View Departments"
-]
+    "View All Departments",
+    "View All Roles",
+    "View All Employees",
+    "View Employees by Manager",
+    "View Employees by Department",
+    "View total budget of a Department",
+    "Add a Department",
+    "Add Role",
+    "Add Employee",
+    "Update Employee Role",
+    "Update Employee Manager",
+    "Delete Departments",
+    "Delete Roles",
+    "Delete Employees",
+    "Exit",
+  ],
     })
-}
+    .then((answer) => {
+        if (nextPrompt === "View All Departments") {
+            viewDepartments();
+          } else if (nextPrompt === "View All Roles") {
+            viewRoles();
+          } else if (nextPrompt === "View All Employees") {
+            viewEmployees();
+          } else if (nextPrompt === "View Employees by Manager") {
+            viewEmployeesByManager();
+          } else if (nextPrompt === "View Employees by Department") {
+            viewEmployeesByDepartment();
+          } else if (nextPrompt === "View total budget of a Department") {
+            viewBudget();
+          } else if (nextPrompt === "Add a Department") {
+            addDepartment();
+          } else if (nextPrompt === "Add a Role") {
+            addRole();
+          } else if (nextPrompt === "Add an Employee") {
+            addEmployee();
+          } else if (nextPrompt === "Update an Employee Role") {
+            updateEmployeeRole();
+          } else if (nextPrompt === "Update an Employee Manager") {
+            updateEmployeeManager();
+          } else if (nextPrompt === "Delete Departments") {
+            deleteDepartment();
+          } else if (nextPrompt === "Delete Roles") {
+            deleteRole();
+          } else if (nextPrompt === "Delete Employees") {
+            deleteEmployee();
+          } else {
+            goodbye();
+          }
+        });
+    }
 
 //departments
+function viewDepartments() {
+    console.log(`
+  Departments
+    `);
+  
 //roles
+function viewRoles() {
+    console.log(`
+  Roles
+    `);
 //employees
 //db.query
 //employees by department
