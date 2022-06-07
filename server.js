@@ -10,4 +10,9 @@
 //employees by manager
 //employees by salary
 //add a department
-//
+//return to nav/inquirer
+//add a role
+//search for department
+//new role
+//return to menu
+//add employee
