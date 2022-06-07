@@ -6,3 +6,8 @@
 //roles
 //employees
 //db.query
+//employees by department
+//employees by manager
+//employees by salary
+//add a department
+//
