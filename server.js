@@ -23,7 +23,20 @@ function welcome() {
     `);
     nav();
 }
-//inquirer 
+//menu
+function nav() {
+    //inquirer 
+    inquirer
+    .prompt({
+type: "list",
+name: "navigation",
+message: "Please make a selection.",
+choices: [
+    "View Departments"
+]
+    })
+}
+
 //departments
 //roles
 //employees
