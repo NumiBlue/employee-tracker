@@ -2,16 +2,27 @@
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
 const consoleTable = require("console.table");
-require("dotenv").config();
+const dotenv = require("dotenv"); dotenv.config();
 
 //connect to database
 const db = mysql.createConnection(
     {
         host: "localhost",
 
-//your mysql info
+//your mysql info, come back to it later
 user: process.env.DB_US,
 password: process.env.DB_PW,
+databse: "employee",
+    },
+    console.log("Connected.")
+);
+
+function welcome() {
+    console.log(`
+    Welcome to the Employee Database
+    `);
+    nav();
+}
 //inquirer 
 //departments
 //roles
