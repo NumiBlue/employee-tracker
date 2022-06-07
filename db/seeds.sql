@@ -13,8 +13,17 @@ VALUES
 ("Day Shift Leader", 26500, 3),
 ("Night Shift Leader", 27000, 3),
 ("Host", 13000, 4),
-("Intern", 9000, 4),
+("Intern", 9000, 4);
 
+ INSERT INTO employee(first_name, last_name, role_id, manager_id)
+VALUES 
+("Laura", "Latte", 1, NULL),
+("Esther", "Patience", 2, NULL),
+("Chris", "Dolce", 3, 2),
+("Lashawn", "Cider", 1, 3),
+("Ophelia", "Autumn", 4, 3),
+("Hayden", "Cardamom", 3, 2),
+("Aiden", "Pepper", 4, 3;)
 
 
 ),
