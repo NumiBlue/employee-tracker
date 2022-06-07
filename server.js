@@ -62,21 +62,21 @@ choices: [
             viewEmployeesByDepartment();
           } else if (nextPrompt === "View total budget of a Department") {
             viewBudget();
-          } else if (nextPrompt === "Add a Department") {
+          } else if (nextPrompt === "Add Department") {
             addDepartment();
-          } else if (nextPrompt === "Add a Role") {
+          } else if (nextPrompt === "Add Role") {
             addRole();
-          } else if (nextPrompt === "Add an Employee") {
+          } else if (nextPrompt === "Add Employee") {
             addEmployee();
-          } else if (nextPrompt === "Update an Employee Role") {
+          } else if (nextPrompt === "Update Role") {
             updateEmployeeRole();
-          } else if (nextPrompt === "Update an Employee Manager") {
+          } else if (nextPrompt === "Update Manager") {
             updateEmployeeManager();
-          } else if (nextPrompt === "Delete Departments") {
+          } else if (nextPrompt === "Remove Departments") {
             deleteDepartment();
-          } else if (nextPrompt === "Delete Roles") {
+          } else if (nextPrompt === "Remove Roles") {
             deleteRole();
-          } else if (nextPrompt === "Delete Employees") {
+          } else if (nextPrompt === "Remove Employees") {
             deleteEmployee();
           } else {
             goodbye();
@@ -116,6 +116,7 @@ function viewRoles() {
           console.table(result);
           nav();
         }
+    
       );
 
 
