@@ -300,9 +300,73 @@ db.query(`SELECT * FROM employee`, function (err, result, fields) {
     });
     managerOptions.push("null");
   });
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "firstNameInput",
+        message: "Enter the employee's first name.",
+        validate: (firstNameInput) => {
+          if (!firstNameInput) {
+            console.log("You must enter the employee's first name.");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "lastNameInput",
+        message: "Enter the employee's last name.",
+        validate: (lastNameInput) => {
+          if (!lastNameInput) {
+            console.log("You must enter the employee's last name.");
+            return false;
+          } else {
+            return true;
+          }
+        },
+      },
+      {
+        type: "list",
+        name: "roleInput",
+        message: "Please choose a role for this employee.",
+        choices: roleOptions,
+      },
+      {
+        type: "list",
+        name: "managerInput",
+        message: "Please choose the employee's manager.",
+        choices: managerOptions,
+      },
+    ])
+    .then((answers) => {
+      let firstName = answers.firstNameInput;
+      let lastName = answers.lastNameInput;
+      let roleArray = answers.roleInput.split("");
+      let roleId = roleArray[0];
 //get manager id or null
+let managerId = [];
+      if (answers.managerInput === "null") {
+        managerId.push("null");
+      } else {
+        let managerArray = answers.managerInput.split("");
+        managerId.push(managerArray[0]);
+      }
 //query new employee
+db.query(
+    `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+    VALUES ("${firstName}", "${lastName}", ${roleId}, ${managerId});`,
+    function (err, result, fields) {
+      if (err) throw err;
+      console.log("Employee Added.");
 //return to menu
+nav();
+        }
+      );
+    }
+}
 //update employee role
 //db query to get role and id
 //prompts for changes
