@@ -50,17 +50,17 @@ choices: [
   ],
     })
     .then((answer) => {
-        if (nextPrompt === "View All Departments") {
+        if (nextPrompt === "View Departments") {
             viewDepartments();
-          } else if (nextPrompt === "View All Roles") {
+          } else if (nextPrompt === "View Roles") {
             viewRoles();
-          } else if (nextPrompt === "View All Employees") {
+          } else if (nextPrompt === "View Employees") {
             viewEmployees();
           } else if (nextPrompt === "View Employees by Manager") {
             viewEmployeesByManager();
           } else if (nextPrompt === "View Employees by Department") {
             viewEmployeesByDepartment();
-          } else if (nextPrompt === "View total budget of a Department") {
+          } else if (nextPrompt === "View Salary") {
             viewBudget();
           } else if (nextPrompt === "Add Department") {
             addDepartment();
