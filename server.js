@@ -280,8 +280,26 @@ inquirer
     });
 }
 //add employee
+function addEmployee() {
+    const roleOptions = [];
+    const managerOptions = [];
 //ask for title and id
+db.query(`SELECT * FROM roles`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var role = dbData.id + ": " + dbData.title;
+      roleOptions.push(role);
+    });
+  });
 //db query to get name and id
+db.query(`SELECT * FROM employee`, function (err, result, fields) {
+    if (err) throw err;
+    result.forEach((dbData) => {
+      var employees = dbData.id + ": " + dbData.first_name + dbData.last_name;
+      managerOptions.push(employees);
+    });
+    managerOptions.push("null");
+  });
 //get manager id or null
 //query new employee
 //return to menu
